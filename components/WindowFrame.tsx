@@ -17,7 +17,10 @@ export default function WindowFrame({ id, title, defaultPosition, zIndex, childr
   const minimizeWindow = useWindowStore((state) => state.minimizeWindow);
   const focusWindow = useWindowStore((state) => state.focusWindow);
 
-  const [size, setSize] = useState({ width: 620, height: 460 });
+  const [size, setSize] = useState({
+    width: id === "ai" ? 760 : 620,
+    height: id === "ai" ? 560 : 460,
+  });
   const [position, setPosition] = useState({
     x: defaultPosition.x,
     y: defaultPosition.y,
@@ -27,8 +30,8 @@ export default function WindowFrame({ id, title, defaultPosition, zIndex, childr
     <Rnd
       size={size}
       position={position}
-      minWidth={420}
-      minHeight={260}
+      minWidth={id === "ai" ? 620 : 420}
+      minHeight={id === "ai" ? 420 : 260}
       bounds="window"
       dragHandleClassName="xp-titlebar"
       onDragStart={() => focusWindow(id)}

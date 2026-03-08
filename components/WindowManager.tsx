@@ -3,6 +3,7 @@
 import WindowFrame from "@/components/WindowFrame";
 import TilWindow from "@/components/TilWindow";
 import { useWindowStore } from "@/store/windowStore";
+import AIChatWindow from "@/components/AIChatWindow";
 
 type TilPost = {
   id: string;
@@ -100,9 +101,8 @@ export default function WindowManager({ tilPosts }: Props) {
 
           if (window.id === "ai") {
             return (
-              <WindowFrame key={window.id} id="ai" title="Ask Hailey AI" defaultPosition={{ x: 360, y: 130 }} zIndex={window.zIndex}>
-                <h2 className="text-2xl font-bold">Ask Hailey AI</h2>
-                <p className="mt-2 text-sm text-neutral-700">AI assistant window placeholder for later.</p>
+              <WindowFrame key={window.id} id="ai" title="Hailey Messenger" defaultPosition={{ x: 260, y: 90 }} zIndex={window.zIndex}>
+                <AIChatWindow />
               </WindowFrame>
             );
           }
