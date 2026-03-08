@@ -1,13 +1,39 @@
 import OpenAI from "openai";
 import crypto from "crypto";
-import { createClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { getPortfolioContext } from "@/lib/ai-context";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
-const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!);
+type Database = {
+  public: {
+    Tables: {
+      ai_usage: {
+        Row: {
+          id: number;
+          client_key: string;
+          month_key: string;
+          request_count: number;
+        };
+        Insert: {
+          id?: number;
+          client_key: string;
+          month_key: string;
+          request_count: number;
+        };
+        Update: {
+          id?: number;
+          client_key?: string;
+          month_key?: string;
+          request_count?: number;
+        };
+        Relationships: [];
+      };
+    };
+    Views: Record<string, never>;
+    Functions: Record<string, never>;
+    Enums: Record<string, never>;
+    CompositeTypes: Record<string, never>;
+  };
+};
 
 const SYSTEM_PROMPT = `
 You are Hailey's portfolio assistant.
@@ -24,7 +50,7 @@ Rules:
 - Do not exaggerate her experience, impact, or seniority.
 - If something is not documented, say you do not have enough evidence.
 - Keep answers under 120 words unless the user explicitly asks for more detail.
--Always finish the sentence and provide a complete answer.
+- Always finish the sentence and provide a complete answer.
 
 Answering style:
 - Present Hailey as a strong early-career developer candidate without overstating her background.
@@ -62,6 +88,7 @@ function getPublicError(error: unknown) {
   const e = error as {
     status?: number;
     code?: string;
+    message?: string;
   };
 
   if (e?.status === 429 && e?.code === "insufficient_quota") {
@@ -91,7 +118,7 @@ function getPublicError(error: unknown) {
   };
 }
 
-async function checkAndIncrementRateLimit(clientKey: string, monthKey: string) {
+async function checkAndIncrementRateLimit(supabase: SupabaseClient<Database>, clientKey: string, monthKey: string) {
   const { data: existing, error: selectError } = await supabase
     .from("ai_usage")
     .select("id, request_count")
@@ -134,6 +161,24 @@ async function checkAndIncrementRateLimit(clientKey: string, monthKey: string) {
 
 export async function POST(req: Request) {
   try {
+    const openAiApiKey = process.env.OPENAI_API_KEY;
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+    if (!openAiApiKey) {
+      return Response.json({ answer: "Server configuration error: missing OpenAI API key." }, { status: 500 });
+    }
+
+    if (!supabaseUrl || !supabaseServiceRoleKey) {
+      return Response.json({ answer: "Server configuration error: missing Supabase credentials." }, { status: 500 });
+    }
+
+    const openai = new OpenAI({
+      apiKey: openAiApiKey,
+    });
+
+    const supabase = createClient<Database>(supabaseUrl, supabaseServiceRoleKey);
+
     const body = await req.json();
     const message = body?.message;
 
@@ -151,7 +196,7 @@ export async function POST(req: Request) {
     const clientKey = hashClientKey(rawClientKey);
     const monthKey = getMonthKey();
 
-    const limit = await checkAndIncrementRateLimit(clientKey, monthKey);
+    const limit = await checkAndIncrementRateLimit(supabase, clientKey, monthKey);
 
     if (!limit.allowed) {
       return Response.json(
@@ -166,6 +211,7 @@ export async function POST(req: Request) {
 
     const response = await openai.responses.create({
       model: "gpt-5-mini",
+      reasoning: { effort: "minimal" },
       max_output_tokens: 500,
       input: [
         {
