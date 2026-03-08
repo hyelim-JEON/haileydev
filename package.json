@@ -9,9 +9,11 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.98.0",
     "framer-motion": "^12.35.0",
     "gray-matter": "^4.0.3",
     "next": "16.1.6",
+    "openai": "^6.27.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-draggable": "^4.5.0",
