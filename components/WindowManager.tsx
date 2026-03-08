@@ -4,6 +4,7 @@ import WindowFrame from "@/components/WindowFrame";
 import TilWindow from "@/components/TilWindow";
 import { useWindowStore } from "@/store/windowStore";
 import AIChatWindow from "@/components/AIChatWindow";
+import ContactHaileyWindow from "@/components/ContactHaileyWindow";
 
 type TilPost = {
   id: string;
@@ -103,6 +104,13 @@ export default function WindowManager({ tilPosts }: Props) {
             return (
               <WindowFrame key={window.id} id="ai" title="Hailey Messenger" defaultPosition={{ x: 260, y: 90 }} zIndex={window.zIndex}>
                 <AIChatWindow />
+              </WindowFrame>
+            );
+          }
+          if (window.id === "mail") {
+            return (
+              <WindowFrame key={window.id} id="mail" title="Contact Hailey" defaultPosition={{ x: 260, y: 90 }} zIndex={window.zIndex}>
+                <ContactHaileyWindow contactEmail="hyelimiam@gmail.com" />
               </WindowFrame>
             );
           }
