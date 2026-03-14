@@ -5,6 +5,7 @@ import TilWindow from "@/components/TilWindow";
 import { useWindowStore } from "@/store/windowStore";
 import AIChatWindow from "@/components/AIChatWindow";
 import ContactHaileyWindow from "@/components/ContactHaileyWindow";
+import AboutTerminal from "@/components/AboutTerminal";
 
 type TilPost = {
   id: string;
@@ -75,10 +76,7 @@ export default function WindowManager({ tilPosts }: Props) {
           if (window.id === "about") {
             return (
               <WindowFrame key={window.id} id="about" title="About Me" defaultPosition={{ x: 240, y: 150 }} zIndex={window.zIndex}>
-                <h2 className="text-2xl font-bold">About Hailey</h2>
-                <p className="mt-2 text-sm text-neutral-700">
-                  Frontend / full stack developer with a strong eye for user-centered design and intuitive interfaces.
-                </p>
+                <AboutTerminal />
               </WindowFrame>
             );
           }
