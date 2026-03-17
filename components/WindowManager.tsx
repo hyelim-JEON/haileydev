@@ -6,6 +6,7 @@ import { useWindowStore } from "@/store/windowStore";
 import AIChatWindow from "@/components/AIChatWindow";
 import ContactHaileyWindow from "@/components/ContactHaileyWindow";
 import AboutTerminal from "@/components/AboutTerminal";
+import ProjectsWindow from "@/components/projects/ProjectsWindow";
 
 type TilPost = {
   id: string;
@@ -66,29 +67,44 @@ export default function WindowManager({ tilPosts }: Props) {
 
           if (window.id === "projects") {
             return (
-              <WindowFrame key={window.id} id="projects" title="Projects" defaultPosition={{ x: 180, y: 110 }} zIndex={window.zIndex}>
-                <h2 className="text-2xl font-bold">Projects</h2>
-                <p className="mt-2 text-sm text-neutral-700">Add your selected projects here.</p>
+              <WindowFrame
+                key={window.id}
+                id="projects"
+                title="Projects"
+                defaultPosition={{ x: 180, y: 110 }}
+                zIndex={window.zIndex}
+                defaultWidth={1120}
+                defaultHeight={760}
+              >
+                <ProjectsWindow />
               </WindowFrame>
             );
           }
 
           if (window.id === "about") {
             return (
-              <WindowFrame key={window.id} id="about" title="About Me" defaultPosition={{ x: 240, y: 150 }} zIndex={window.zIndex}>
+              <WindowFrame
+                key={window.id}
+                id="about"
+                title="About Me"
+                defaultPosition={{ x: 240, y: 150 }}
+                zIndex={window.zIndex}
+                defaultWidth={820}
+                defaultHeight={620}
+              >
                 <AboutTerminal />
               </WindowFrame>
             );
           }
 
-          if (window.id === "resume") {
-            return (
-              <WindowFrame key={window.id} id="resume" title="Resume.txt" defaultPosition={{ x: 300, y: 190 }} zIndex={window.zIndex}>
-                <h2 className="text-2xl font-bold">Resume</h2>
-                <p className="mt-2 text-sm text-neutral-700">Add your real PDF link here.</p>
-              </WindowFrame>
-            );
-          }
+          // if (window.id === "resume") {
+          //   return (
+          //     <WindowFrame key={window.id} id="resume" title="Resume.txt" defaultPosition={{ x: 300, y: 190 }} zIndex={window.zIndex}>
+          //       <h2 className="text-2xl font-bold">Resume</h2>
+          //       <p className="mt-2 text-sm text-neutral-700">Add your real PDF link here.</p>
+          //     </WindowFrame>
+          //   );
+          // }
 
           if (window.id === "til") {
             return (
@@ -108,7 +124,7 @@ export default function WindowManager({ tilPosts }: Props) {
           if (window.id === "mail") {
             return (
               <WindowFrame key={window.id} id="mail" title="Contact Hailey" defaultPosition={{ x: 260, y: 90 }} zIndex={window.zIndex}>
-                <ContactHaileyWindow contactEmail="hyelimiam@gmail.com" />
+                <ContactHaileyWindow contactEmail="haileyindev@gmail.com" />
               </WindowFrame>
             );
           }
