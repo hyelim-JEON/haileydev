@@ -54,11 +54,13 @@ export default function WindowManager({ tilPosts }: Props) {
                 </div>
 
                 <div className="mt-5 flex flex-wrap gap-2">
-                  <a href="#" className="rounded border border-[#9b9b9b] bg-[#efefef] px-3 py-1.5 text-sm">
+                  <a
+                    href="https://github.com/hyelim-JEON/linkup-v2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded border border-[#9b9b9b] bg-[#efefef] px-3 py-1.5 text-sm"
+                  >
                     GitHub
-                  </a>
-                  <a href="#" className="rounded border border-[#9b9b9b] bg-[#efefef] px-3 py-1.5 text-sm">
-                    Demo
                   </a>
                 </div>
               </WindowFrame>
