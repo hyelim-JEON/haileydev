@@ -235,13 +235,11 @@ export default function AboutTerminal() {
   };
 
   return (
-    <div onClick={focusInput} className="flex h-[500px] w-full flex-col overflow-hidden rounded-2xl border border-zinc-800 bg-[#0b0f14] shadow-2xl">
+    <div
+      onClick={focusInput}
+      className="flex h-full min-h-0 w-full flex-col overflow-hidden rounded-2xl border border-zinc-800 bg-[#0b0f14] shadow-2xl"
+    >
       <div className="flex items-center justify-between border-b border-zinc-800 bg-zinc-900/80 px-4 py-3">
-        <div className="flex items-center gap-2">
-          <span className="h-3 w-3 rounded-full bg-red-400" />
-          <span className="h-3 w-3 rounded-full bg-yellow-400" />
-          <span className="h-3 w-3 rounded-full bg-green-400" />
-        </div>
         <p className="text-sm font-medium text-zinc-300">Terminal</p>
         <div className="w-[52px]" />
       </div>

@@ -14,14 +14,22 @@ type Props = {
   defaultHeight?: number;
 };
 
-export default function WindowFrame({ id, title, defaultPosition, zIndex, children }: Props) {
+export default function WindowFrame({ id, title, defaultPosition, zIndex, children, defaultWidth, defaultHeight }: Props) {
   const closeWindow = useWindowStore((state) => state.closeWindow);
   const minimizeWindow = useWindowStore((state) => state.minimizeWindow);
   const focusWindow = useWindowStore((state) => state.focusWindow);
 
+  const resolvedDefaultWidth = defaultWidth ?? (id === "ai" ? 760 : id === "mail" ? 560 : 620);
+
+  const resolvedDefaultHeight = defaultHeight ?? (id === "ai" ? 560 : id === "mail" ? 620 : 460);
+
+  const resolvedMinWidth = id === "projects" ? 900 : id === "about" ? 700 : id === "ai" ? 620 : id === "mail" ? 520 : 420;
+
+  const resolvedMinHeight = id === "projects" ? 620 : id === "about" ? 520 : id === "ai" ? 420 : id === "mail" ? 520 : 260;
+
   const [size, setSize] = useState({
-    width: id === "ai" ? 760 : id === "mail" ? 560 : 620,
-    height: id === "ai" ? 560 : id === "mail" ? 620 : 460,
+    width: resolvedDefaultWidth,
+    height: resolvedDefaultHeight,
   });
 
   const [position, setPosition] = useState({
@@ -33,8 +41,8 @@ export default function WindowFrame({ id, title, defaultPosition, zIndex, childr
     <Rnd
       size={size}
       position={position}
-      minWidth={id === "ai" ? 620 : id === "mail" ? 520 : 420}
-      minHeight={id === "ai" ? 420 : id === "mail" ? 520 : 260}
+      minWidth={resolvedMinWidth}
+      minHeight={resolvedMinHeight}
       bounds="window"
       dragHandleClassName="xp-titlebar"
       onDragStart={() => focusWindow(id)}
