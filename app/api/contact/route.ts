@@ -2,7 +2,7 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const CONTACT_EMAIL = process.env.CONTACT_EMAIL || "haileyindev@gmail.com";
+const CONTACT_EMAIL = process.env.CONTACT_EMAIL || "hyelimiam@gmail.com";
 const lastRequest = new Map<string, number>();
 
 function getClientIp(req: Request) {
@@ -53,7 +53,7 @@ export async function POST(req: Request) {
 
     const result = await resend.emails.send({
       from: "Hailey Portfolio <onboarding@resend.dev>",
-      to: "haileyindev@gmail.com",
+      to: "hyelimiam@gmail.com",
       replyTo: email,
       subject: `Portfolio contact from ${name || "Visitor"}`,
       text: [`From: ${name || "Not provided"}`, `Reply email: ${email}`, "", "Message:", message].join("\n"),
@@ -64,11 +64,12 @@ export async function POST(req: Request) {
 
       return Response.json(
         {
-          error: "Email could not be sent in test mode. Make sure the recipient is haileyindev@gmail.com and that your Resend API key is correct.",
+          error: "Email could not be sent in test mode. Make sure the recipient is hyelimiam@gmail.com and that your Resend API key is correct.",
         },
         { status: 500 },
       );
     }
+    console.log("RESEND_TO =", process.env.RESEND_TO);
 
     return Response.json({ success: true });
   } catch (error) {

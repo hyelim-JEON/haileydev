@@ -8,7 +8,7 @@ type Props = {
   contactEmail?: string;
 };
 
-export default function ContactHaileyWindow({ contactEmail = "haileyindev@gmail.com" }: Props) {
+export default function ContactHaileyWindow({ contactEmail = "hyelimiam@gmail.com" }: Props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");

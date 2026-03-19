@@ -54,11 +54,13 @@ export default function WindowManager({ tilPosts }: Props) {
                 </div>
 
                 <div className="mt-5 flex flex-wrap gap-2">
-                  <a href="#" className="rounded border border-[#9b9b9b] bg-[#efefef] px-3 py-1.5 text-sm">
+                  <a
+                    href="https://github.com/hyelim-JEON/linkup-v2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded border border-[#9b9b9b] bg-[#efefef] px-3 py-1.5 text-sm"
+                  >
                     GitHub
-                  </a>
-                  <a href="#" className="rounded border border-[#9b9b9b] bg-[#efefef] px-3 py-1.5 text-sm">
-                    Demo
                   </a>
                 </div>
               </WindowFrame>
@@ -124,7 +126,7 @@ export default function WindowManager({ tilPosts }: Props) {
           if (window.id === "mail") {
             return (
               <WindowFrame key={window.id} id="mail" title="Contact Hailey" defaultPosition={{ x: 260, y: 90 }} zIndex={window.zIndex}>
-                <ContactHaileyWindow contactEmail="haileyindev@gmail.com" />
+                <ContactHaileyWindow contactEmail="hyelimiam@gmail.com" />
               </WindowFrame>
             );
           }
