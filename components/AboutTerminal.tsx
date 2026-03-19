@@ -143,20 +143,20 @@ export default function AboutTerminal() {
         <div className="space-y-1">
           <p>
             GitHub:{" "}
-            <a href="https://github.com/your-github" target="_blank" rel="noreferrer" className="text-sky-400 underline underline-offset-4">
+            <a href="https://github.com/hyelim-JEON" target="_blank" rel="noreferrer" className="text-sky-400 underline underline-offset-4">
               github.com/your-github
             </a>
           </p>
-          <p>
+          {/* <p>
             LinkedIn:{" "}
-            <a href="https://linkedin.com/in/your-linkedin" target="_blank" rel="noreferrer" className="text-sky-400 underline underline-offset-4">
-              linkedin.com/in/your-linkedin
+            <a href="https://linkedin.com/in/" target="_blank" rel="noreferrer" className="text-sky-400 underline underline-offset-4">
+              linkedin.com/in/
             </a>
-          </p>
+          </p> */}
           <p>
             Email:{" "}
-            <a href="mailto:your@email.com" className="text-sky-400 underline underline-offset-4">
-              your@email.com
+            <a href="mailto:haileyindev@gmail.com" className="text-sky-400 underline underline-offset-4">
+              haileyindev@gmail.com
             </a>
           </p>
         </div>,
@@ -174,7 +174,9 @@ export default function AboutTerminal() {
       pushOutput(
         <div className="space-y-1">
           <p>☕ Fun fact:</p>
-          <p>I also have barista experience and enjoy the craft behind coffee, detail, and service.</p>
+          <p>I also have barista experience and genuinely enjoy the craft behind coffee —</p>
+          <p>from attention to detail and service to consistently producing high-quality latte art.</p>
+          <p>If you are ever curious, feel free to ask — I’m always up for showing off my latte art.</p>
         </div>,
       );
       return;

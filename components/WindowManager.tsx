@@ -126,7 +126,7 @@ export default function WindowManager({ tilPosts }: Props) {
           if (window.id === "mail") {
             return (
               <WindowFrame key={window.id} id="mail" title="Contact Hailey" defaultPosition={{ x: 260, y: 90 }} zIndex={window.zIndex}>
-                <ContactHaileyWindow contactEmail="haileyindev@gmail.com" />
+                <ContactHaileyWindow contactEmail="hyelimiam@gmail.com" />
               </WindowFrame>
             );
           }

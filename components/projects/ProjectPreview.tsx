@@ -21,13 +21,12 @@ export default function ProjectPreview({ project }: ProjectPreviewProps) {
           <p className="mt-2 text-sm text-[#555]">{project.shortDescription}</p>
         </div>
 
-        <div className="overflow-hidden border border-[#d6d6d6] bg-[#fafafa]">
-          <div className="flex aspect-[16/9] items-center justify-center text-[#777]">
+        <div className="overflow-hidden border border-[#d6d6d6] bg-black">
+          <div className="flex items-center justify-center py-4">
             {project.image ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={project.image} alt={project.name} className="h-full w-full object-cover" />
+              <img src={project.image} alt={project.name} className="h-auto max-h-[420px] w-auto object-contain" />
             ) : (
-              <span>Project Preview</span>
+              <span className="text-[#aaa]">Project Preview</span>
             )}
           </div>
         </div>
