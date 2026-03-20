@@ -144,7 +144,7 @@ export default function AboutTerminal() {
           <p>
             GitHub:{" "}
             <a href="https://github.com/hyelim-JEON" target="_blank" rel="noreferrer" className="text-sky-400 underline underline-offset-4">
-              github.com/your-github
+              https://github.com/hyelim-JEON
             </a>
           </p>
           {/* <p>
