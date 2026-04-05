@@ -8,6 +8,7 @@ import AIChatWindow from "@/components/AIChatWindow";
 import ContactHaileyWindow from "@/components/ContactHaileyWindow";
 import AboutTerminal from "@/components/AboutTerminal";
 import ProjectsWindow from "@/components/projects/ProjectsWindow";
+import AlgorithmPlaygroundWindow from "@/components/algorithm/AlgorithmPlaygroundWindow";
 
 type TilPost = {
   id: string;
@@ -53,7 +54,7 @@ export default function WindowManager({ tilPosts }: Props) {
   const isMobile = viewport.width < 768;
   const isTablet = viewport.width >= 768 && viewport.width < 1100;
 
-  const getResponsiveFrame = (type: "linkup" | "projects" | "about" | "til" | "ai" | "mail") => {
+  const getResponsiveFrame = (type: "linkup" | "projects" | "about" | "til" | "ai" | "mail" | "algorithms") => {
     if (isMobile) {
       return {
         defaultPosition: { x: 8, y: 8 },
@@ -88,6 +89,12 @@ export default function WindowManager({ tilPosts }: Props) {
             defaultPosition: { x: 44, y: 48 },
             defaultWidth: Math.min(viewport.width - 88, 700),
             defaultHeight: Math.min(viewport.height - 96, 600),
+          };
+        case "algorithms":
+          return {
+            defaultPosition: { x: 48, y: 40 },
+            defaultWidth: Math.min(viewport.width - 96, 900),
+            defaultHeight: Math.min(viewport.height - 88, 680),
           };
         case "linkup":
         default:
@@ -130,6 +137,12 @@ export default function WindowManager({ tilPosts }: Props) {
           defaultPosition: { x: 260, y: 90 },
           defaultWidth: 700,
           defaultHeight: 560,
+        };
+      case "algorithms":
+        return {
+          defaultPosition: { x: 140, y: 70 },
+          defaultWidth: 1040,
+          defaultHeight: 760,
         };
       default:
         return {
@@ -282,6 +295,24 @@ export default function WindowManager({ tilPosts }: Props) {
                 zIndex={windowItem.zIndex}
               >
                 <ContactHaileyWindow contactEmail="hyelimiam@gmail.com" />
+              </WindowFrame>
+            );
+          }
+
+          if (windowItem.id === "algorithms") {
+            const frame = getResponsiveFrame("algorithms");
+
+            return (
+              <WindowFrame
+                key={windowItem.id}
+                id="algorithms"
+                title="Algorithm Notes"
+                defaultPosition={frame.defaultPosition}
+                defaultWidth={frame.defaultWidth}
+                defaultHeight={frame.defaultHeight}
+                zIndex={windowItem.zIndex}
+              >
+                <AlgorithmPlaygroundWindow />
               </WindowFrame>
             );
           }
