@@ -15,10 +15,10 @@ const longestWordProblem: Problem = {
     { input: '{"sentence":"a bb ccc bb"}', expected: '"ccc"' },
   ],
   code: `function longestWord(sentence) {
-  const words = sentence.split(" "); // split sentence into words
+  const words = sentence.split(" "); // split sentence into words O(n)
   let longest = "";
 
-  for (const word of words) {
+  for (const word of words) { //O(n)
     // use >= to prefer later word in case of tie
     if (word.length >= longest.length) {
       longest = word;
